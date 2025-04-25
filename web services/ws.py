@@ -90,7 +90,7 @@ def get_personaje(id):
         try:
             cursor = conn.cursor(as_dict=True)
             cursor.execute(
-                "SELECT id, name, email FROM personajes WHERE id = %d", (id,))
+                "SELECT id, name, email, whatsapp FROM personajes WHERE id = %d", (id,))
             personaje = cursor.fetchone()
             if personaje:
                 return jsonify(personaje), 200
