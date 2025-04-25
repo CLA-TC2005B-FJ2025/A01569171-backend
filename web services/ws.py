@@ -112,16 +112,17 @@ def create_personaje():
     id = data.get('id')
     name = data.get('name')
     email = data.get('email')
+    whatsapp = data.get('whatsapp')
 
     if not id or not name or not email:
-        return jsonify({'error': 'Se requiere id, nombre y correo electrónico'}), 400
+        return jsonify({'error': 'Se requiere id, nombre, correo electrónico y whatsapp'}), 400
 
     conn = get_db_connection()
     if conn:
         try:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO personajes (id, name, email) VALUES (%d, %s, %s)", (id, name, email))
+                "INSERT INTO personajes (id, name, email, whatsapp) VALUES (%d, %s, %s, %s)", (id, name, email, whatsapp))
             conn.commit()
             return jsonify({'mensaje': 'Personaje creado exitosamente'}), 201
         except Exception as e:
